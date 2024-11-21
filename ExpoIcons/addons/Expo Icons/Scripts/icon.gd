@@ -125,13 +125,13 @@ func _get_property_list() -> Array[Dictionary]:
 		"type" = TYPE_STRING,
 		"usage" = PROPERTY_USAGE_DEFAULT
 	})
-	properties.append({
-		"name": "icon_glyph",
-		"type": TYPE_INT,
-		"usage": PROPERTY_USAGE_DEFAULT,
-		"hint": PROPERTY_HINT_ENUM,
-		"hint_string": " ,".join(_get_glyphs().keys())
-	})
+	#properties.append({
+	#	"name": "icon_glyph",
+	#	"type": TYPE_INT,
+	#	"usage": PROPERTY_USAGE_DEFAULT,
+	#	"hint": PROPERTY_HINT_ENUM,
+	#	"hint_string": " ,".join(_get_glyphs().keys())
+	#})
 	properties.push_back({
 		"name": "icon_color",
 		"type": TYPE_COLOR,
