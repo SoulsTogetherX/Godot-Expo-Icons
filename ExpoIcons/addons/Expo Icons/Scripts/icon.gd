@@ -40,10 +40,11 @@ var icon_glyph : int:
 	get: return _icon_glyph
 	set(val):
 		var glyphs := _get_glyphs()
-		_icon_glyph = val
-		_icon_name = glyphs.keys()[val]
-		_current_icon = _icon_name
-		queue_redraw()
+		if glyphs.size() > val:
+			_icon_glyph = val
+			_icon_name = glyphs.keys()[val]
+			_current_icon = _icon_name
+			queue_redraw()
 
 ## Horizontally centers the icon, within the [member size], proportional to this value
 var icon_align_horizontal : float = 0.5:
@@ -66,17 +67,6 @@ var icon_padding_vertical : float = 0:
 	set(val):
 		icon_padding_vertical = val
 		queue_redraw()
-
-static var _is_loaded : bool = false
-## An abstract function meant to be overridden.
-##
-## Should be used to load all the needed data for the icon. [FontFile]s, Glyphmaps, etc.
-static func _load_data() -> void:
-	push_warning("Function 'load_data()' not implemented in abstract class")
-func _ready() -> void:
-	if !_is_loaded: return
-	ready.connect(_load_data, CONNECT_ONE_SHOT)
-	_is_loaded = true
 
 static func _load_json_file(filePath: String):
 	if FileAccess.file_exists(filePath):
@@ -120,25 +110,6 @@ func _update_min_size(glyph_size : Vector2) -> void:
 		visible = true
 func _get_minimum_size() -> Vector2:
 	return _min_size
-
-## An abstract function meant to be overridden.
-##
-## Should return the string name of the icon this node should have upon creation
-static func get_default_icon() -> String:
-	push_warning("Function 'get_default_icon()' not implemented in abstract class")
-	return ""
-## An abstract function ment to be overridden.
-##
-## When given an string [param icon_name], return the corresponding glyph index.
-## Returns -1 if icon cannot be found within the curren glyphs
-func get_glyph_by_name(icon_name: String) -> int:
-	var glyphs := _get_glyphs()
-	if glyphs.has(icon_name):
-		return glyphs[icon_name]
-	return -1
-func _get_glyphs() -> Dictionary:
-	push_warning("Function '_get_glyphs()' not implemented in abstract class")
-	return {}
 
 func _get_property_list() -> Array[Dictionary]:
 	var properties: Array[Dictionary] = []
@@ -242,14 +213,60 @@ func _property_get_revert(property: StringName) -> Variant:
 			return 0
 	return null
 
+func _ready() -> void:
+	var glyphs := _get_glyphs()
+	if _icon_name == "":
+		var defaultIcon := get_default_icon()
+		
+		_current_icon = defaultIcon
+		_icon_name = defaultIcon
+		_icon_glyph = glyphs.keys().find(defaultIcon)
+	else:
+		_current_icon = _icon_name
+		_icon_glyph = glyphs.keys().find(_icon_name)
+
+## An abstract function meant to be overridden.
+##
+## Should be used to load all the needed data for the icon. [FontFile]s, Glyphmaps, etc.
+## It is reacomended to use threaded loading.
+##
+## [b]NOTE[/b]: This will only be called once, when needed, throughout the whole game.
+static func _load_data() -> void:
+	push_warning("Function 'load_data()' not implemented in abstract class")
+
+## An abstract function meant to be overridden.
+##
+## Should return the string name of the icon this node should have upon creation
+static func get_default_icon() -> String:
+	push_warning("Function 'get_default_icon()' not implemented in abstract class")
+	return ""
+## An abstract function ment to be overridden.
+##
+## When given an string [param icon_name], return the corresponding glyph index.
+## Returns -1 if icon cannot be found within the curren glyphs
+func get_glyph_by_name(icon_name: String) -> int:
+	var glyphs := _get_glyphs()
+	if glyphs.has(icon_name):
+		return glyphs[icon_name]
+	return -1
+## An abstract function ment to be overridden.
+##
+## Returns the current FontFile in use.
+##
+## See [constant fontFile]
+func get_fontFile() -> FontFile:
+	push_warning("Function 'get_fontFile()' not implemented in abstract class")
+	return null
+func _get_glyphs() -> Dictionary:
+	push_warning("Function '_get_glyphs()' not implemented in abstract class")
+	return {}
+
 ## Draws the Icon repersented by the [param fontFile] and [param glyphIndex].
 ## This will automatically handle the resizing, recoloing, and font size provided.
 ##
 ## If you wish to make your own icon, call this in a function overload of [method CanvasItem._draw]
 func _draw_icon(fontFile : FontFile, glyphIndex : int) -> void:
-	if fontFile == null:
-		push_error("Fontfile is null")
-		return
+	if fontFile == null: return
 	
 	var ci = get_canvas_item()
 	if glyphIndex == -1 || !fontFile.has_char(glyphIndex):
@@ -260,3 +277,5 @@ func _draw_icon(fontFile : FontFile, glyphIndex : int) -> void:
 	var glyph_info := _get_glyph_info(glyphIndex, fontFile)
 	_update_min_size(glyph_info.glyph_size)
 	fontFile.draw_char(ci, _get_icon_pos(glyph_info.glyph_size) - glyph_info.glyph_offset, glyphIndex, _icon_size, modulate * icon_color)
+func _draw() -> void:
+	_draw_icon(get_fontFile(), get_glyph_by_name(_icon_name))

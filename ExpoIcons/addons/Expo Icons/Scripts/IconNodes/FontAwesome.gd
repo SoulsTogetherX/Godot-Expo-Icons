@@ -3,22 +3,33 @@ class_name FontAwesome extends IconBase
 ## The node for all icons located in the FontAwesome [FontFile]
 
 const defaultIcon : String = "user" ## Default Icon
-const fontFile : FontFile = preload(_FONT_FOLDER + "FontAwesome.ttf") ## Used [FontFile]
-const glyphs : Dictionary = preload(_GLYPHMAPS_FOLDER + "FontAwesome.json").data ## Used glyphs
+static var fontFile : FontFile ## Used [FontFile]
+static var glyphs : Dictionary ## Used glyphs
+
+static var _ref_count : int = 0
+func _enter_tree() -> void:
+	_load_values()
+func _exit_tree() -> void:
+	_unload_values()
+func _load_values() -> void:
+	_ref_count += 1
+	if _ref_count == 1:
+		fontFile = load(_FONT_FOLDER + "FontAwesome.ttf")
+		glyphs = load(_GLYPHMAPS_FOLDER + "FontAwesome.json").data
+func _unload_values() -> void:
+	_ref_count -= 1
+	if _ref_count <= 0:
+		fontFile = null
+		glyphs.clear()
 
 ## When given an string [param icon_name], return the corresponding glyph index.
 ## Returns -1 if icon cannot be found within the curren glyphs
 static func get_default_icon() -> String:
 	return defaultIcon
+## Returns the current FontFile in use.
+##
+## See [constant fontFile]
+func get_fontFile() -> FontFile:
+	return fontFile
 func _get_glyphs() -> Dictionary:
 	return glyphs
-
-func _ready() -> void:
-	if _icon_name == "":
-		_current_icon = defaultIcon
-		_icon_name = defaultIcon
-		_icon_glyph = glyphs.keys().find(defaultIcon)
-	else:
-		_current_icon = _icon_name
-func _draw() -> void:
-	_draw_icon(fontFile, get_glyph_by_name(_icon_name))
