@@ -5,45 +5,27 @@ class_name FontAwesome6 extends ProFreeIcons
 ## [b]NOTE[/b]: Some Icons are broken. This is due to a faulty meta file. I have no found a correct one on the internet yet.
 
 const defaultIcon = "user" ## Default Icon
-static var fontFiles : Dictionary  ## Used [FontFile]s
-static var glyphs : Dictionary ## Used glyphs
-static var metas : Dictionary ## Used metadatas
-
-static var _ref_count : int = 0
-func _enter_tree() -> void:
-	_load_values()
-func _exit_tree() -> void:
-	_unload_values()
-func _load_values() -> void:
-	_ref_count += 1
-	if _ref_count == 1:
-		fontFiles = {
-			"brands": load(_FONT_FOLDER + "FontAwesome6_Brands.ttf"),
-			"regular": load(_FONT_FOLDER + "FontAwesome6_Regular.ttf"),
-			"solid": load(_FONT_FOLDER + "FontAwesome6_Solid.ttf"),
-		}
-		glyphs = {
-			ICON_STATE.Free: load(
+const fontFiles : Dictionary = {
+			"brands": preload(_FONT_FOLDER + "FontAwesome6_Brands.ttf"),
+			"regular": preload(_FONT_FOLDER + "FontAwesome6_Regular.ttf"),
+			"solid": preload(_FONT_FOLDER + "FontAwesome6_Solid.ttf"),
+		} ## Used [FontFile]s
+const glyphs : Dictionary = {
+			ICON_STATE.Free: preload(
 				_GLYPHMAPS_FOLDER + "FontAwesome6Free.json"
 			).data,
-			ICON_STATE.Pro: load(
+			ICON_STATE.Pro: preload(
 				_GLYPHMAPS_FOLDER + "FontAwesome6Pro.json"
 			).data
-		}
-		metas = {
-			ICON_STATE.Free: load(
+		} ## Used glyphs
+const metas : Dictionary = {
+			ICON_STATE.Free: preload(
 				_GLYPHMAPS_FOLDER + "FontAwesome6Free_meta.json"
 			).data,
-			ICON_STATE.Pro: load(
+			ICON_STATE.Pro: preload(
 				_GLYPHMAPS_FOLDER + "FontAwesome6Pro_meta.json"
 			).data
-		}
-func _unload_values() -> void:
-	_ref_count -= 1
-	if _ref_count <= 0:
-		fontFiles.clear()
-		glyphs.clear()
-		metas.clear()
+		} ## Used metadatas
 
 ## When given an string [param icon_name], return the corresponding glyph index.
 ## Returns -1 if icon cannot be found within the curren glyphs

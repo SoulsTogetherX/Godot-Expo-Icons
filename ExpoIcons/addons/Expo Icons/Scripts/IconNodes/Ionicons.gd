@@ -3,24 +3,8 @@ class_name Ionicons extends IconBase
 ## The node for all icons located in the Ionicons [FontFile]
 
 const defaultIcon : String = "person" ## Default Icon
-static var fontFile : FontFile ## Used [FontFile]
-static var glyphs : Dictionary ## Used glyphs
-
-static var _ref_count : int = 0
-func _enter_tree() -> void:
-	_load_values()
-func _exit_tree() -> void:
-	_unload_values()
-func _load_values() -> void:
-	_ref_count += 1
-	if _ref_count == 1:
-		fontFile = load(_FONT_FOLDER + "Ionicons.ttf")
-		glyphs = load(_GLYPHMAPS_FOLDER + "Ionicons.json").data
-func _unload_values() -> void:
-	_ref_count -= 1
-	if _ref_count <= 0:
-		fontFile = null
-		glyphs.clear()
+const fontFile : FontFile = preload(_FONT_FOLDER + "Ionicons.ttf") ## Used [FontFile]
+const glyphs : Dictionary = preload(_GLYPHMAPS_FOLDER + "Ionicons.json").data ## Used glyphs
 
 ## When given an string [param icon_name], return the corresponding glyph index.
 ## Returns -1 if icon cannot be found within the curren glyphs

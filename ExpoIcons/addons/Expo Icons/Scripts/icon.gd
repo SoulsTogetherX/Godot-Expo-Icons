@@ -68,6 +68,12 @@ var icon_padding_vertical : float = 0:
 		icon_padding_vertical = val
 		queue_redraw()
 
+var auto_size : bool = false:
+	set(val):
+		auto_size = val
+		notify_property_list_changed()
+		queue_redraw()
+
 static func _load_json_file(filePath: String):
 	if FileAccess.file_exists(filePath):
 		var dataFile = FileAccess.open(filePath, FileAccess.READ)
@@ -99,27 +105,19 @@ func _get_glyph_info(glyph_selected: int, fontFile: Font) -> Dictionary:
 	ret["glyph_size"] = text_server.font_get_glyph_size(font_rid, glyph_font_size, glyph_index)
 	
 	return ret
-func _update_min_size(glyph_size : Vector2) -> void:
+func _update_min_size(glyph_size : Vector2) -> Vector2:
 	var min_temp : Vector2 = glyph_size + Vector2(icon_padding_horizontal, icon_padding_vertical)
-	if min_temp == _min_size: return
+	if min_temp == _min_size: return min_temp
 	_min_size = min_temp
 	
-	if is_node_ready():
-		visible = false
-		await get_tree().process_frame
-		visible = true
+	update_minimum_size()
+	return min_temp
 func _get_minimum_size() -> Vector2:
 	return _min_size
 
 func _get_property_list() -> Array[Dictionary]:
 	var properties: Array[Dictionary] = []
 	
-	properties.append({
-		"name" = "Icon Info",
-		"type" = TYPE_NIL,
-		"usage" = PROPERTY_USAGE_GROUP,
-		"hint_string" = "icon_"
-	})
 	properties.append({
 		"name" = "icon_name",
 		"type" = TYPE_STRING,
@@ -138,9 +136,14 @@ func _get_property_list() -> Array[Dictionary]:
 		"usage": PROPERTY_USAGE_DEFAULT
 	})
 	properties.push_back({
+		"name": "auto_size",
+		"type": TYPE_BOOL,
+		"usage": PROPERTY_USAGE_DEFAULT
+	})
+	properties.push_back({
 		"name": "icon_size",
 		"type": TYPE_INT,
-		"usage": PROPERTY_USAGE_DEFAULT
+		"usage": PROPERTY_USAGE_DEFAULT | (PROPERTY_USAGE_READ_ONLY if auto_size else 0)
 	})
 	
 	properties.append({
@@ -268,6 +271,8 @@ func _get_glyphs() -> Dictionary:
 func _draw_icon(fontFile : FontFile, glyphIndex : int) -> void:
 	if fontFile == null: return
 	
+	if auto_size: _find_fitting_size()
+	
 	var ci = get_canvas_item()
 	if glyphIndex == -1 || !fontFile.has_char(glyphIndex):
 		_update_min_size(_get_glyph_info(65, fontFile).glyph_size)
@@ -277,5 +282,12 @@ func _draw_icon(fontFile : FontFile, glyphIndex : int) -> void:
 	var glyph_info := _get_glyph_info(glyphIndex, fontFile)
 	_update_min_size(glyph_info.glyph_size)
 	fontFile.draw_char(ci, _get_icon_pos(glyph_info.glyph_size) - glyph_info.glyph_offset, glyphIndex, _icon_size, modulate * icon_color)
+func _find_fitting_size() -> void:
+	
+	
+	
+	
+	
+	pass
 func _draw() -> void:
 	_draw_icon(get_fontFile(), get_glyph_by_name(_icon_name))
