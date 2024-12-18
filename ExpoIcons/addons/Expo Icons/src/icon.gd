@@ -3,7 +3,7 @@ class_name IconBase extends Control
 ## The base abstract class for all icon nodes
 
 const _FONT_FOLDER := "res://addons/Expo Icons/assets/fonts/"
-const _GLYPHMAPS_FOLDER := "res://addons/Expo Icons/Glyphmaps/"
+const _GLYPHMAPS_FOLDER := "res://addons/Expo Icons/assets/glyphmaps/"
 const DEFAULT_COLOR := Color.WHITE ## Default Color for Icons
 const DEFAULT_ICON_SIZE := 16 ## Default font size for Icons
 
