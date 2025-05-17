@@ -3,22 +3,22 @@ A simple godot addon that allows the usage of all expo vector icons.
 
 Source font files pulled from https://github.com/expo/vector-icons/tree/master
 
-##Contains
+## Contains
 
-AntDesign
-Entypo
-EvilIcons
-Feather
-FontAwesome
-FontAwesome5
-FontAwesome6
-Fontisto
-Foundation
-Ionicons
-MaterialCommunityIcons
-MaterialIcons
-Octicons
-SimpleLineIcons
+AntDesign,
+Entypo,
+EvilIcons,
+Feather,
+FontAwesome,
+FontAwesome5,
+FontAwesome6,
+Fontisto,
+Foundation,
+Ionicons,
+MaterialCommunityIcons,
+MaterialIcons,
+Octicons,
+SimpleLineIcons,
 Zocial
 
 ## Customizability
