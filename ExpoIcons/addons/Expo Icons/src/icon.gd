@@ -14,13 +14,13 @@ var _icon_size : int = DEFAULT_ICON_SIZE
 var icon_size : int:
 	get:
 		return _icon_size
-	set(_size):
-		_icon_size = max(1, _size)
+	set(val):
+		_icon_size = max(1, val)
 		queue_redraw()
 ## Color of the Icon
 var icon_color : Color = DEFAULT_COLOR:
-	set(color):
-		icon_color = color
+	set(val):
+		icon_color = val
 		queue_redraw()
 var _current_icon : String
 var _icon_name : String

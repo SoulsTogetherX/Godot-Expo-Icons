@@ -14,91 +14,91 @@ func _enter_tree() -> void:
 	
 	add_custom_type(
 		"AntDesign",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/AntDesign.gd"),
 		load(ICON_ICON_FOLDER + "AntDesign.svg")
 	)
 	add_custom_type(
 		"Entypo",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/Entypo.gd"),
 		load(ICON_ICON_FOLDER + "Entypo.svg")
 	)
 	add_custom_type(
 		"EvilIcons",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/EvilIcons.gd"),
 		load(ICON_ICON_FOLDER + "EvilIcons.svg")
 	)
 	add_custom_type(
 		"Feather",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/Feather.gd"),
 		load(ICON_ICON_FOLDER + "Feather.svg")
 	)
 	add_custom_type(
 		"FontAwesome5",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/ProFreeIcons/FontAwesome5.gd"),
 		load(ICON_ICON_FOLDER + "FontAwesome5.svg")
 	)
 	add_custom_type(
 		"FontAwesome6",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/ProFreeIcons/FontAwesome6.gd"),
 		load(ICON_ICON_FOLDER + "FontAwesome6.svg")
 	)
 	add_custom_type(
 		"FontAwesome",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/FontAwesome.gd"),
 		load(ICON_ICON_FOLDER + "FontAwesome.svg")
 	)
 	add_custom_type(
 		"Fontisto",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/Fontisto.gd"),
 		load(ICON_ICON_FOLDER + "Fontisto.svg")
 	)
 	add_custom_type(
 		"Foundation",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/Foundation.gd"),
 		load(ICON_ICON_FOLDER + "Foundation.svg")
 	)
 	add_custom_type(
 		"Ionicons",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/Ionicons.gd"),
 		load(ICON_ICON_FOLDER + "Ionicons.svg")
 	)
 	add_custom_type(
 		"MaterialCommunityIcons",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/MaterialCommunityIcons.gd"),
 		load(ICON_ICON_FOLDER + "MaterialCommunityIcons.svg")
 	)
 	add_custom_type(
 		"MaterialIcons",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/MaterialIcons.gd"),
 		load(ICON_ICON_FOLDER + "MaterialIcons.svg")
 	)
 	add_custom_type(
 		"Octicons",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/Octicons.gd"),
 		load(ICON_ICON_FOLDER + "Octicons.svg")
 	)
 	add_custom_type(
 		"SimpleLineIcons",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/SimpleLineIcons.gd"),
 		load(ICON_ICON_FOLDER + "SimpleLineIcons.svg")
 	)
 	add_custom_type(
 		"Zocial",
-		"IconBase",
+		"Control",
 		load(ICON_SCRIPT_FOLDER + "IconNodes/Zocial.gd"),
 		load(ICON_ICON_FOLDER + "Zocial.svg")
 	)
