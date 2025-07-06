@@ -1,12 +1,17 @@
+# Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
+@tool
 class_name ProFreeIcons extends IconBase
 ## The base abstract class for all ProFreeIcon nodes
 
+#region Enums
 enum ICON_STATE {
 	Free,
 	Pro
 }
+#endregion
 
-var _icon_state : ICON_STATE = ICON_STATE.Free
+
+#region External Variables
 ## The state that determines what [FontFile] and meta the icon uses
 ##
 ## See [enum ICON_STATE].
@@ -26,10 +31,12 @@ var _icon_state : ICON_STATE = ICON_STATE.Free
 			_icon_glyph = glyph_index
 		notify_property_list_changed()
 		queue_redraw()
+#endregion
 
-## An abstract function ment to be overridden.
-##
-## Returns the current FontFile in use, based on the current [member icon_state] value.
-func get_current_fontFile() -> FontFile:
-	push_warning("Function 'get_current_fontFile()' not implemented in abstract class")
-	return null
+
+#region Private Variables
+var _icon_state : ICON_STATE = ICON_STATE.Free
+#endregion
+
+
+# Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025

@@ -1,15 +1,18 @@
+# Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
 @tool
 class_name IconBase extends Control
 ## The base abstract class for all icon nodes
 
-const _FONT_FOLDER := "res://addons/Expo Icons/assets/fonts/"
-const _GLYPHMAPS_FOLDER := "res://addons/Expo Icons/assets/glyphmaps/"
+#region Constants
+const FONT_FOLDER := "res://addons/Expo Icons/assets/fonts/"
+const GLYPHMAPS_FOLDER := "res://addons/Expo Icons/assets/glyphmaps/"
+
 const DEFAULT_COLOR := Color.WHITE ## Default Color for Icons
 const DEFAULT_ICON_SIZE := 16 ## Default font size for Icons
+#endregion
 
-var _min_size : Vector2
 
-var _icon_size : int = DEFAULT_ICON_SIZE
+#region External Variables
 ## Font size of the Icon's Glyphs
 var icon_size : int:
 	get:
@@ -22,8 +25,7 @@ var icon_color : Color = DEFAULT_COLOR:
 	set(val):
 		icon_color = val
 		queue_redraw()
-var _current_icon : String
-var _icon_name : String
+
 ## String of the icon
 var icon_name : String:
 	get: return _icon_name
@@ -34,7 +36,7 @@ var icon_name : String:
 			_icon_glyph = glyphs.keys().find(val)
 		_icon_name = val
 		queue_redraw()
-var _icon_glyph : int
+
 ## Glyph Index of the icon
 var icon_glyph : int:
 	get: return _icon_glyph
@@ -67,13 +69,22 @@ var icon_padding_vertical : float = 0:
 	set(val):
 		icon_padding_vertical = val
 		queue_redraw()
+#endregion
 
-var auto_size : bool = false:
-	set(val):
-		auto_size = val
-		notify_property_list_changed()
-		queue_redraw()
 
+#region Private Variables
+var _icon_size : int = DEFAULT_ICON_SIZE
+
+var _current_icon : String
+var _icon_name : String
+
+var _icon_glyph : int
+
+var _min_size : Vector2
+#endregion
+
+
+#region Static Methods
 static func _load_json_file(filePath: String):
 	if FileAccess.file_exists(filePath):
 		var dataFile = FileAccess.open(filePath, FileAccess.READ)
@@ -85,33 +96,21 @@ static func _load_json_file(filePath: String):
 			print("Error reading file")
 	else:
 		print("File doesn't exist")
+#endregion
 
-func _get_icon_pos(glyph_size : Vector2) -> Vector2:
-	return (size - glyph_size) * Vector2(icon_align_horizontal, icon_align_vertical)
-func _get_glyph_info(glyph_selected: int, fontFile: Font) -> Dictionary:
-	var textline : TextLine = TextLine.new()
-	textline.add_string(char(glyph_selected), fontFile, _icon_size)
-	var rid : RID = textline.get_rid()
-	var text_server : TextServer = TextServerManager.get_primary_interface()
-	var glyph : Dictionary = text_server.shaped_text_get_glyphs(rid)[0]
-	
-	var font_rid : RID = glyph.get('font_rid', RID())
-	var glyph_font_size : Vector2i = Vector2i(glyph.get('font_size', 8), 0)
-	var glyph_index : int = glyph.get('index', -1)
-	
-	var ret : Dictionary
-	ret["font_size"] = glyph_font_size
-	ret["glyph_offset"] = text_server.font_get_glyph_offset(font_rid, glyph_font_size, glyph_index)
-	ret["glyph_size"] = text_server.font_get_glyph_size(font_rid, glyph_font_size, glyph_index)
-	
-	return ret
-func _update_min_size(glyph_size : Vector2) -> Vector2:
-	var min_temp : Vector2 = glyph_size + Vector2(icon_padding_horizontal, icon_padding_vertical)
-	if min_temp == _min_size: return min_temp
-	_min_size = min_temp
-	
-	update_minimum_size()
-	return min_temp
+
+#region Private Virtual Methods
+func _init() -> void:
+	var glyphs := _get_glyphs()
+	if _icon_name == "":
+		var defaultIcon := get_default_icon()
+		
+		_current_icon = defaultIcon
+		_icon_name = defaultIcon
+		_icon_glyph = glyphs.keys().find(defaultIcon)
+	else:
+		_current_icon = _icon_name
+		_icon_glyph = glyphs.keys().find(_icon_name)
 func _get_minimum_size() -> Vector2:
 	return _min_size
 
@@ -123,27 +122,22 @@ func _get_property_list() -> Array[Dictionary]:
 		"type" = TYPE_STRING,
 		"usage" = PROPERTY_USAGE_DEFAULT
 	})
-	#properties.append({
-	#	"name": "icon_glyph",
-	#	"type": TYPE_INT,
-	#	"usage": PROPERTY_USAGE_DEFAULT,
-	#	"hint": PROPERTY_HINT_ENUM,
-	#	"hint_string": " ,".join(_get_glyphs().keys())
-	#})
+	properties.append({
+		"name": "icon_glyph",
+		"type": TYPE_INT,
+		"usage": PROPERTY_USAGE_DEFAULT,
+		"hint": PROPERTY_HINT_ENUM,
+		"hint_string": " ,".join(_get_glyphs().keys())
+	})
 	properties.push_back({
 		"name": "icon_color",
 		"type": TYPE_COLOR,
 		"usage": PROPERTY_USAGE_DEFAULT
 	})
 	properties.push_back({
-		"name": "auto_size",
-		"type": TYPE_BOOL,
-		"usage": PROPERTY_USAGE_DEFAULT
-	})
-	properties.push_back({
 		"name": "icon_size",
 		"type": TYPE_INT,
-		"usage": PROPERTY_USAGE_DEFAULT | (PROPERTY_USAGE_READ_ONLY if auto_size else 0)
+		"usage": PROPERTY_USAGE_DEFAULT
 	})
 	
 	properties.append({
@@ -215,79 +209,105 @@ func _property_get_revert(property: StringName) -> Variant:
 		&"icon_padding_horizontal", &"icon_padding_vertical":
 			return 0
 	return null
+func _draw() -> void:
+	_draw_icon(get_fontFile(), get_glyph_by_name(_icon_name))
+#endregion
 
-func _ready() -> void:
-	var glyphs := _get_glyphs()
-	if _icon_name == "":
-		var defaultIcon := get_default_icon()
-		
-		_current_icon = defaultIcon
-		_icon_name = defaultIcon
-		_icon_glyph = glyphs.keys().find(defaultIcon)
-	else:
-		_current_icon = _icon_name
-		_icon_glyph = glyphs.keys().find(_icon_name)
 
-## An abstract function meant to be overridden.
+#region Custom Abstract Methods
+## An abstract method meant to be overridden.
 ##
 ## Should be used to load all the needed data for the icon. [FontFile]s, Glyphmaps, etc.
 ## It is reacomended to use threaded loading.
 ##
 ## [b]NOTE[/b]: This will only be called once, when needed, throughout the whole game.
 static func _load_data() -> void:
-	push_warning("Function 'load_data()' not implemented in abstract class")
+	push_warning("Method 'load_data()' not implemented in abstract class")
 
-## An abstract function meant to be overridden.
+## An abstract method meant to be overridden.
 ##
 ## Should return the string name of the icon this node should have upon creation
 static func get_default_icon() -> String:
-	push_warning("Function 'get_default_icon()' not implemented in abstract class")
+	push_warning("Method 'get_default_icon()' not implemented in abstract class")
 	return ""
-## An abstract function ment to be overridden.
+
+## An abstract method meant to be overridden.
 ##
-## When given an string [param icon_name], return the corresponding glyph index.
-## Returns -1 if icon cannot be found within the curren glyphs
-func get_glyph_by_name(icon_name: String) -> int:
-	var glyphs := _get_glyphs()
-	if glyphs.has(icon_name):
-		return glyphs[icon_name]
-	return -1
-## An abstract function ment to be overridden.
+## Returns the current FontFile in use.
+##
+## See [constant fontFile]
+func _get_glyphs() -> Dictionary:
+	push_warning("Method '_get_glyphs()' not implemented in abstract class")
+	return {}
+
+## An abstract method meant to be overridden.
 ##
 ## Returns the current FontFile in use.
 ##
 ## See [constant fontFile]
 func get_fontFile() -> FontFile:
-	push_warning("Function 'get_fontFile()' not implemented in abstract class")
+	push_warning("Method 'get_fontFile()' not implemented in abstract class")
 	return null
-func _get_glyphs() -> Dictionary:
-	push_warning("Function '_get_glyphs()' not implemented in abstract class")
-	return {}
+#endregion
+
+
+#region Private Methods
+func _get_icon_pos(glyph_size : Vector2) -> Vector2:
+	return (size - glyph_size) * Vector2(icon_align_horizontal, icon_align_vertical)
+func _get_glyph_info(icon_size : int, fontFile: Font, glyph_selected: int) -> Dictionary:
+	var textline : TextLine = TextLine.new()
+	textline.add_string(char(glyph_selected), fontFile, icon_size)
+	var rid : RID = textline.get_rid()
+	var text_server : TextServer = TextServerManager.get_primary_interface()
+	var glyph : Dictionary = text_server.shaped_text_get_glyphs(rid)[0]
+	
+	var font_rid : RID = glyph.get('font_rid', RID())
+	var glyph_font_size : Vector2i = Vector2i(glyph.get('font_size', 8), 0)
+	var glyph_index : int = glyph.get('index', -1)
+	
+	var ret : Dictionary
+	ret["font_size"] = glyph_font_size
+	ret["glyph_offset"] = text_server.font_get_glyph_offset(font_rid, glyph_font_size, glyph_index)
+	ret["glyph_size"] = text_server.font_get_glyph_size(font_rid, glyph_font_size, glyph_index)
+	
+	return ret
+func _update_min_size(glyph_size : Vector2) -> Vector2:
+	var min_temp : Vector2 = glyph_size + Vector2(icon_padding_horizontal, icon_padding_vertical)
+	if min_temp == _min_size: return min_temp
+	_min_size = min_temp
+	
+	update_minimum_size()
+	return min_temp
+
 
 ## Draws the Icon repersented by the [param fontFile] and [param glyphIndex].
 ## This will automatically handle the resizing, recoloing, and font size provided.
 ##
-## If you wish to make your own icon, call this in a function overload of [method CanvasItem._draw]
+## If you wish to make your own icon, call this in a method overload of [method CanvasItem._draw]
 func _draw_icon(fontFile : FontFile, glyphIndex : int) -> void:
-	if fontFile == null: return
-	
-	if auto_size: _find_fitting_size()
+	if fontFile == null:
+		return
 	
 	var ci = get_canvas_item()
 	if glyphIndex == -1 || !fontFile.has_char(glyphIndex):
-		_update_min_size(_get_glyph_info(65, fontFile).glyph_size)
+		_update_min_size(_get_glyph_info(_icon_size, fontFile, 65).glyph_size)
 		draw_rect(Rect2(Vector2.ZERO, _min_size), Color.WHITE, false)
 		return
 	
-	var glyph_info := _get_glyph_info(glyphIndex, fontFile)
+	var glyph_info := _get_glyph_info(_icon_size, fontFile, glyphIndex)
 	_update_min_size(glyph_info.glyph_size)
 	fontFile.draw_char(ci, _get_icon_pos(glyph_info.glyph_size) - glyph_info.glyph_offset, glyphIndex, _icon_size, modulate * icon_color)
-func _find_fitting_size() -> void:
-	
-	
-	
-	
-	
-	pass
-func _draw() -> void:
-	_draw_icon(get_fontFile(), get_glyph_by_name(_icon_name))
+#endregion
+
+
+#region Public Methods
+## When given an string [param icon_name], return the corresponding glyph index.
+## Returns -1 if icon cannot be found within the curren glyphs.
+func get_glyph_by_name(icon_name: String) -> int:
+	var glyphs := _get_glyphs()
+	if glyphs.has(icon_name):
+		return glyphs[icon_name]
+	return -1
+#endregion
+
+# Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025

@@ -8,7 +8,7 @@ func _enter_tree() -> void:
 	add_custom_type(
 		"IconBase",
 		"Control",
-		load(ICON_SCRIPT_FOLDER + "icon.gd"), 
+		load(ICON_SCRIPT_FOLDER + "IconBase.gd"), 
 		load(ICON_ICON_FOLDER + "IconBase.svg")
 	)
 	
