@@ -1,12 +1,12 @@
 # Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
 @tool
-class_name AntDesign extends IconBase
-## The node for all icons located in the AntDesign [FontFile]
+class_name FontAwesome extends IconBase
+## The node for all icons located in the FontAwesome [FontFile]
 
 #region Constants
 const DEFAULT_ICON : String = "user" ## Default Icon
-const FONT_FILE : FontFile = preload(FONT_FOLDER + "AntDesign.ttf") ## Used [FontFile]
-const GLYPHS : Dictionary = preload(GLYPHMAPS_FOLDER + "AntDesign.json").data ## Used glyphs
+const FONT_FILE : FontFile = preload("uid://cmttaxjfo5tdv") ## Used [FontFile]
+const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/FontAwesome.json").data ## Used glyphs
 #endregion
 
 

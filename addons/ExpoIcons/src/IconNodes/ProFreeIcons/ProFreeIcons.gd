@@ -1,5 +1,6 @@
 # Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
 @tool
+@abstract
 class_name ProFreeIcons extends IconBase
 ## The base abstract class for all ProFreeIcon nodes
 
@@ -37,6 +38,5 @@ enum ICON_STATE {
 #region Private Variables
 var _icon_state : ICON_STATE = ICON_STATE.Free
 #endregion
-
 
 # Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025

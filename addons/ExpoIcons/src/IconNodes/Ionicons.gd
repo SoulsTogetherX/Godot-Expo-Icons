@@ -1,12 +1,12 @@
 # Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
 @tool
-class_name MaterialIcons extends IconBase
-## The node for all icons located in the MaterialIcons [FontFile]
+class_name Ionicons extends IconBase
+## The node for all icons located in the Ionicons [FontFile]
 
 #region Constants
 const DEFAULT_ICON : String = "person" ## Default Icon
-const FONT_FILE : FontFile = preload(FONT_FOLDER + "MaterialIcons.ttf") ## Used [FontFile]
-const GLYPHS : Dictionary = preload(GLYPHMAPS_FOLDER + "MaterialIcons.json").data ## Used glyphs
+const FONT_FILE : FontFile = preload("uid://cp71wiwy0bloj") ## Used [FontFile]
+const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/Ionicons.json").data ## Used glyphs
 #endregion
 
 

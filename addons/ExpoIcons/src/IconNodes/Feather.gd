@@ -1,12 +1,12 @@
 # Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
 @tool
-class_name SimpleLineIcons extends IconBase
-## The node for all icons located in the SimpleLineIcons [FontFile]
+class_name Feather extends IconBase
+## The node for all icons located in the Feather [FontFile]
 
 #region Constants
 const DEFAULT_ICON : String = "user" ## Default Icon
-const FONT_FILE : FontFile = preload(FONT_FOLDER + "SimpleLineIcons.ttf") ## Used [FontFile]
-const GLYPHS : Dictionary = preload(GLYPHMAPS_FOLDER + "SimpleLineIcons.json").data ## Used glyphs
+const FONT_FILE : FontFile = preload("uid://dupdvtwohlnpw") ## Used [FontFile]
+const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/Feather.json").data ## Used glyphs
 #endregion
 
 

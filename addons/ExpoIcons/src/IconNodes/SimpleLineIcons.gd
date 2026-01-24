@@ -1,12 +1,12 @@
 # Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
 @tool
-class_name Entypo extends IconBase
-## The node for all icons located in the Entypo [FontFile]
+class_name SimpleLineIcons extends IconBase
+## The node for all icons located in the SimpleLineIcons [FontFile]
 
 #region Constants
 const DEFAULT_ICON : String = "user" ## Default Icon
-const FONT_FILE : FontFile = preload(FONT_FOLDER + "Entypo.ttf") ## Used [FontFile]
-const GLYPHS : Dictionary = preload(GLYPHMAPS_FOLDER + "Entypo.json").data ## Used glyphs
+const FONT_FILE : FontFile = preload("uid://bsfmr3gd6qqce") ## Used [FontFile]
+const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/SimpleLineIcons.json").data ## Used glyphs
 #endregion
 
 

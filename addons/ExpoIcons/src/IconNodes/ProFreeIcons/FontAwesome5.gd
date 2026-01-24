@@ -1,31 +1,31 @@
 # Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
 @tool
-class_name FontAwesome6 extends ProFreeIcons
-## The node for all icons located in the FontAwesome6 [FontFile]s
+class_name FontAwesome5 extends ProFreeIcons
+## The node for all icons located in the FontAwesome5 [FontFile]s
 ##
 ## [b]NOTE[/b]: Some Icons are broken. This is due to a faulty meta file. I have no found a correct one on the internet yet.
 
 #region Constants
 const DEFAULT_ICON = "user" ## Default Icon
 const FONT_FILES : Dictionary = {
-			"brands": preload(FONT_FOLDER + "FontAwesome6_Brands.ttf"),
-			"regular": preload(FONT_FOLDER + "FontAwesome6_Regular.ttf"),
-			"solid": preload(FONT_FOLDER + "FontAwesome6_Solid.ttf"),
+			"brands": preload("uid://c1va44bi6gvkf"),
+			"regular": preload("uid://2jav6jik27cb"),
+			"solid": preload("uid://dxhpk85wcj3vy"),
 		} ## Used [FontFile]s
 const GLYPHS : Dictionary = {
 			ICON_STATE.Free: preload(
-				GLYPHMAPS_FOLDER + "FontAwesome6Free.json"
+				"res://addons/ExpoIcons/assets/glyphmaps/FontAwesome5Free.json"
 			).data,
 			ICON_STATE.Pro: preload(
-				GLYPHMAPS_FOLDER + "FontAwesome6Pro.json"
+				"res://addons/ExpoIcons/assets/glyphmaps/FontAwesome5Pro.json"
 			).data
 		} ## Used glyphs
 const METAS : Dictionary = {
 			ICON_STATE.Free: preload(
-				GLYPHMAPS_FOLDER + "FontAwesome6Free_meta.json"
+				"res://addons/ExpoIcons/assets/glyphmaps/FontAwesome5Free_meta.json"
 			).data,
 			ICON_STATE.Pro: preload(
-				GLYPHMAPS_FOLDER + "FontAwesome6Pro_meta.json"
+				"res://addons/ExpoIcons/assets/glyphmaps/FontAwesome5Pro_meta.json"
 			).data
 		} ## Used metadatas
 #endregion

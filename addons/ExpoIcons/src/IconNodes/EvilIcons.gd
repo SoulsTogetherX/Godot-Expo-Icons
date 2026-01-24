@@ -1,12 +1,12 @@
 # Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
 @tool
-class_name FontAwesome extends IconBase
-## The node for all icons located in the FontAwesome [FontFile]
+class_name EvilIcons extends IconBase
+## The node for all icons located in the EvilIcons [FontFile]
 
 #region Constants
 const DEFAULT_ICON : String = "user" ## Default Icon
-const FONT_FILE : FontFile = preload(FONT_FOLDER + "FontAwesome.ttf") ## Used [FontFile]
-const GLYPHS : Dictionary = preload(GLYPHMAPS_FOLDER + "FontAwesome.json").data ## Used glyphs
+const FONT_FILE : FontFile = preload("uid://ck5kn4ex501") ## Used [FontFile]
+const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/EvilIcons.json").data ## Used glyphs
 #endregion
 
 

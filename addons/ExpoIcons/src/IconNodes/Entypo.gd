@@ -1,12 +1,12 @@
 # Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
 @tool
-class_name MaterialCommunityIcons extends IconBase
-## The node for all icons located in the MaterialCommunityIcons [FontFile]
+class_name Entypo extends IconBase
+## The node for all icons located in the Entypo [FontFile]
 
 #region Constants
-const DEFAULT_ICON : String = "account" ## Default Icon
-const FONT_FILE : FontFile = preload(FONT_FOLDER + "MaterialCommunityIcons.ttf") ## Used [FontFile]
-const GLYPHS : Dictionary = preload(GLYPHMAPS_FOLDER + "MaterialCommunityIcons.json").data ## Used glyphs
+const DEFAULT_ICON : String = "user" ## Default Icon
+const FONT_FILE : FontFile = preload("uid://bvh50gebr7bch") ## Used [FontFile]
+const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/Entypo.json").data ## Used glyphs
 #endregion
 
 

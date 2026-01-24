@@ -1,12 +1,10 @@
 # Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
 @tool
+@abstract
 class_name IconBase extends Control
 ## The base abstract class for all icon nodes
 
 #region Constants
-const FONT_FOLDER := "res://addons/Expo Icons/assets/fonts/"
-const GLYPHMAPS_FOLDER := "res://addons/Expo Icons/assets/glyphmaps/"
-
 const DEFAULT_COLOR := Color.WHITE ## Default Color for Icons
 const DEFAULT_ICON_SIZE := 16 ## Default font size for Icons
 #endregion
@@ -236,18 +234,16 @@ static func get_default_icon() -> String:
 ## Returns the current FontFile in use.
 ##
 ## See [constant fontFile]
-func _get_glyphs() -> Dictionary:
-	push_warning("Method '_get_glyphs()' not implemented in abstract class")
-	return {}
+@abstract
+func _get_glyphs() -> Dictionary
 
 ## An abstract method meant to be overridden.
 ##
 ## Returns the current FontFile in use.
 ##
 ## See [constant fontFile]
-func get_fontFile() -> FontFile:
-	push_warning("Method 'get_fontFile()' not implemented in abstract class")
-	return null
+@abstract
+func get_fontFile() -> FontFile
 #endregion
 
 

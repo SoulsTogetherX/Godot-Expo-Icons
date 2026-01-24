@@ -5,8 +5,8 @@ class_name Fontisto extends IconBase
 
 #region Constants
 const DEFAULT_ICON : String = "person" ## Default Icon
-const FONT_FILE : FontFile = preload(FONT_FOLDER + "Fontisto.ttf") ## Used [FontFile]
-const GLYPHS : Dictionary = preload(GLYPHMAPS_FOLDER + "Fontisto.json").data ## Used glyphs
+const FONT_FILE : FontFile = preload("uid://dxocv16sh5rly") ## Used [FontFile]
+const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/Fontisto.json").data ## Used glyphs
 #endregion
 
 

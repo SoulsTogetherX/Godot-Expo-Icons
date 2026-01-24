@@ -1,12 +1,12 @@
 # Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
 @tool
-class_name Ionicons extends IconBase
-## The node for all icons located in the Ionicons [FontFile]
+class_name Zocial extends IconBase
+## The node for all icons located in the Zocial [FontFile]
 
 #region Constants
-const DEFAULT_ICON : String = "person" ## Default Icon
-const FONT_FILE : FontFile = preload(FONT_FOLDER + "Ionicons.ttf") ## Used [FontFile]
-const GLYPHS : Dictionary = preload(GLYPHMAPS_FOLDER + "Ionicons.json").data ## Used glyphs
+const DEFAULT_ICON : String = "guest" ## Default Icon
+const FONT_FILE : FontFile = preload("uid://dfg3l1ygucpk8") ## Used [FontFile]
+const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/Zocial.json").data ## Used glyphs
 #endregion
 
 
