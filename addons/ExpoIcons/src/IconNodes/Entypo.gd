@@ -5,7 +5,7 @@ class_name Entypo extends IconBase
 
 #region Constants
 const DEFAULT_ICON : String = "user" ## Default Icon
-const FONT_FILE : FontFile = preload("uid://bvh50gebr7bch") ## Used [FontFile]
+const FONT_FILE : FontFile = preload("res://addons/ExpoIcons/assets/fonts/Entypo.ttf") ## Used [FontFile]
 const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/Entypo.json").data ## Used glyphs
 #endregion
 

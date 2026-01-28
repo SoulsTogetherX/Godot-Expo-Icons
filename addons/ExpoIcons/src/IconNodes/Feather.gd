@@ -5,7 +5,7 @@ class_name Feather extends IconBase
 
 #region Constants
 const DEFAULT_ICON : String = "user" ## Default Icon
-const FONT_FILE : FontFile = preload("uid://dupdvtwohlnpw") ## Used [FontFile]
+const FONT_FILE : FontFile = preload("res://addons/ExpoIcons/assets/fonts/Feather.ttf") ## Used [FontFile]
 const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/Feather.json").data ## Used glyphs
 #endregion
 

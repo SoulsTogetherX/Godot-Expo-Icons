@@ -8,9 +8,9 @@ class_name FontAwesome5 extends ProFreeIcons
 #region Constants
 const DEFAULT_ICON = "user" ## Default Icon
 const FONT_FILES : Dictionary = {
-			"brands": preload("uid://c1va44bi6gvkf"),
-			"regular": preload("uid://2jav6jik27cb"),
-			"solid": preload("uid://dxhpk85wcj3vy"),
+			"brands": preload("res://addons/ExpoIcons/assets/fonts/FontAwesome5_Brands.ttf"),
+			"regular": preload("res://addons/ExpoIcons/assets/fonts/FontAwesome5_Regular.ttf"),
+			"solid": preload("res://addons/ExpoIcons/assets/fonts/FontAwesome5_Solid.ttf"),
 		} ## Used [FontFile]s
 const GLYPHS : Dictionary = {
 			ICON_STATE.Free: preload(

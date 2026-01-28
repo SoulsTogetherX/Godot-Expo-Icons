@@ -5,7 +5,7 @@ class_name AntDesign extends IconBase
 
 #region Constants
 const DEFAULT_ICON : String = "user" ## Default Icon
-const FONT_FILE : FontFile = preload("uid://di4v6xqrva0eh") ## Used [FontFile]
+const FONT_FILE : FontFile = preload("res://addons/ExpoIcons/assets/fonts/AntDesign.ttf") ## Used [FontFile]
 const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/AntDesign.json").data ## Used glyphs
 #endregion
 

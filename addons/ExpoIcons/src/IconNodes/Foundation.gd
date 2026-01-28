@@ -5,7 +5,7 @@ class_name Foundation extends IconBase
 
 #region Constants
 const DEFAULT_ICON : String = "torso" ## Default Icon
-const FONT_FILE : FontFile = preload("uid://h2m14mal2f04") ## Used [FontFile]
+const FONT_FILE : FontFile = preload("res://addons/ExpoIcons/assets/fonts/Foundation.ttf") ## Used [FontFile]
 const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/Foundation.json").data ## Used glyphs
 #endregion
 

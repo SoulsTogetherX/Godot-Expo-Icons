@@ -5,7 +5,7 @@ class_name EvilIcons extends IconBase
 
 #region Constants
 const DEFAULT_ICON : String = "user" ## Default Icon
-const FONT_FILE : FontFile = preload("uid://ck5kn4ex501") ## Used [FontFile]
+const FONT_FILE : FontFile = preload("res://addons/ExpoIcons/assets/fonts/EvilIcons.ttf") ## Used [FontFile]
 const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/EvilIcons.json").data ## Used glyphs
 #endregion
 

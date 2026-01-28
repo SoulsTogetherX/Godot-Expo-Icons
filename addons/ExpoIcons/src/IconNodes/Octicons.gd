@@ -5,7 +5,7 @@ class_name Octicons extends IconBase
 
 #region Constants
 const DEFAULT_ICON : String = "person" ## Default Icon
-const FONT_FILE : FontFile = preload("uid://cp8he76iq752y") ## Used [FontFile]
+const FONT_FILE : FontFile = preload("res://addons/ExpoIcons/assets/fonts/Octicons.ttf") ## Used [FontFile]
 const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/Octicons.json").data ## Used glyphs
 #endregion
 

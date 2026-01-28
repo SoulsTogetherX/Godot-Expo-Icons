@@ -5,7 +5,7 @@ class_name Ionicons extends IconBase
 
 #region Constants
 const DEFAULT_ICON : String = "person" ## Default Icon
-const FONT_FILE : FontFile = preload("uid://cp71wiwy0bloj") ## Used [FontFile]
+const FONT_FILE : FontFile = preload("res://addons/ExpoIcons/assets/fonts/Ionicons.ttf") ## Used [FontFile]
 const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/Ionicons.json").data ## Used glyphs
 #endregion
 

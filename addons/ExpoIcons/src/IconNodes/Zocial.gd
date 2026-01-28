@@ -5,7 +5,7 @@ class_name Zocial extends IconBase
 
 #region Constants
 const DEFAULT_ICON : String = "guest" ## Default Icon
-const FONT_FILE : FontFile = preload("uid://dfg3l1ygucpk8") ## Used [FontFile]
+const FONT_FILE : FontFile = preload("res://addons/ExpoIcons/assets/fonts/Zocial.ttf") ## Used [FontFile]
 const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/Zocial.json").data ## Used glyphs
 #endregion
 

@@ -5,7 +5,7 @@ class_name MaterialCommunityIcons extends IconBase
 
 #region Constants
 const DEFAULT_ICON : String = "account" ## Default Icon
-const FONT_FILE : FontFile = preload("uid://dtdg74b05gek8") ## Used [FontFile]
+const FONT_FILE : FontFile = preload("res://addons/ExpoIcons/assets/fonts/MaterialCommunityIcons.ttf") ## Used [FontFile]
 const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/MaterialCommunityIcons.json").data ## Used glyphs
 #endregion
 

@@ -1,103 +1,106 @@
+# Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
 @tool
 extends EditorPlugin
+
+const ICON_FOLDER := "res://addons/ExpoIcons/assets/icons/"
 
 func _enter_tree() -> void:
 	add_custom_type(
 		"IconBase",
 		"Control",
 		load("uid://bfg5x70yt7pii"),
-		load("uid://m1lrpw6a643c")
+		preload(ICON_FOLDER + "IconBase.svg")
 	)
 	
 	add_custom_type(
 		"AntDesign",
 		"Control",
 		load("uid://dyhhvqcy300sm"),
-		load("uid://wrl11vgjareu")
+		preload(ICON_FOLDER + "AntDesign.svg")
 	)
 	add_custom_type(
 		"Entypo",
 		"Control",
 		load("uid://l2q4q4vnluob"),
-		load("uid://d2hnpywqc6hqi")
+		preload(ICON_FOLDER + "Entypo.svg")
 	)
 	add_custom_type(
 		"EvilIcons",
 		"Control",
 		load("uid://8bjt6f1ip3oj"),
-		load("uid://de0wbn1f77ium")
+		preload(ICON_FOLDER + "EvilIcons.svg")
 	)
 	add_custom_type(
 		"Feather",
 		"Control",
 		load("uid://b58the6pio4w"),
-		load("uid://cx80m6b6eueth")
+		preload(ICON_FOLDER + "Feather.svg")
 	)
 	add_custom_type(
 		"FontAwesome5",
 		"Control",
 		load("uid://uo0ns2lhrhkd"),
-		load("uid://bjbly7atqtx4l")
+		preload(ICON_FOLDER + "FontAwesome5.svg")
 	)
 	add_custom_type(
 		"FontAwesome6",
 		"Control",
 		load("uid://cxqnbfkn4sque"),
-		load("uid://2sk8xnu81yqq")
+		preload(ICON_FOLDER + "FontAwesome6.svg")
 	)
 	add_custom_type(
 		"FontAwesome",
 		"Control",
 		load("uid://ouh2uorb4gmr"),
-		load("uid://y5b013krct4w")
+		preload(ICON_FOLDER + "FontAwesome.svg")
 	)
 	add_custom_type(
 		"Fontisto",
 		"Control",
 		load("uid://c6iw3dpi5q7va"),
-		load("uid://dl1mxqni5y21y")
+		preload(ICON_FOLDER + "Fontisto.svg")
 	)
 	add_custom_type(
 		"Foundation",
 		"Control",
 		load("uid://18fl8skgouv8"),
-		load("uid://cixhyyfmy76vq")
+		preload(ICON_FOLDER + "Foundation.svg")
 	)
 	add_custom_type(
 		"Ionicons",
 		"Control",
 		load("uid://bw124ti4smdn4"),
-		load("uid://b67y8hrptj7it")
+		preload(ICON_FOLDER + "Ionicons.svg")
 	)
 	add_custom_type(
 		"MaterialCommunityIcons",
 		"Control",
 		load("uid://sssi1oere6n7"),
-		load("uid://1st7fekoufae")
+		preload(ICON_FOLDER + "MaterialCommunityIcons.svg")
 	)
 	add_custom_type(
 		"MaterialIcons",
 		"Control",
 		load("uid://58tcc605ihw2"),
-		load("uid://bge8aaymmky5a")
+		preload(ICON_FOLDER + "MaterialIcons.svg")
 	)
 	add_custom_type(
 		"Octicons",
 		"Control",
 		load("uid://ottnvo0s64il"),
-		load("uid://ddfxphj6o0q60")
+		preload(ICON_FOLDER + "Octicons.svg")
 	)
 	add_custom_type(
 		"SimpleLineIcons",
 		"Control",
 		load("uid://cvqvpsswcy6ph"),
-		load("uid://c2mm8wufceupk")
+		preload(ICON_FOLDER + "SimpleLineIcons.svg")
 	)
 	add_custom_type(
 		"Zocial",
 		"Control",
 		load("uid://bmxo2408u6o0w"),
-		load("uid://d252n60c2wkaf")
+		preload(ICON_FOLDER + "Zocial.svg")
 	)
 
 func _exit_tree() -> void:
@@ -117,3 +120,5 @@ func _exit_tree() -> void:
 	remove_custom_type("AntDesign")
 	
 	remove_custom_type("IconBase")
+
+# Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025

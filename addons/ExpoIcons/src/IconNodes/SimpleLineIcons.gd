@@ -5,7 +5,7 @@ class_name SimpleLineIcons extends IconBase
 
 #region Constants
 const DEFAULT_ICON : String = "user" ## Default Icon
-const FONT_FILE : FontFile = preload("uid://bsfmr3gd6qqce") ## Used [FontFile]
+const FONT_FILE : FontFile = preload("res://addons/ExpoIcons/assets/fonts/SimpleLineIcons.ttf") ## Used [FontFile]
 const GLYPHS : Dictionary = preload("res://addons/ExpoIcons/assets/glyphmaps/SimpleLineIcons.json").data ## Used glyphs
 #endregion
 
