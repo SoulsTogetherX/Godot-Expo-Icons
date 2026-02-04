@@ -217,6 +217,12 @@ func _property_get_revert(property: StringName) -> Variant:
 func _on_sort_children() -> void:
 	if _icon:
 		fit_child_in_rect(_icon, Rect2(Vector2.ZERO, size))
+func _get_minimum_size() -> Vector2:
+	return (
+		_icon.get_combined_minimum_size()
+		if (_icon && !clip_contents)
+		else Vector2.ZERO
+	)
 #endregion
 
 
