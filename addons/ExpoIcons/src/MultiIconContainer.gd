@@ -5,6 +5,8 @@ class_name MultiIconContainer extends Container
 
 
 #region External Variables
+@export var include_default_icons : bool = true
+
 var icon_size : int = IconBase.DEFAULT_ICON_SIZE:
 	get:
 		return _icon_size
@@ -38,16 +40,11 @@ var icon_state : ProFreeIcons.ICON_STATE:
 #region Private Variables
 var _icon_type : int = -1:
 	set(val):
-		if val != _icon_type:
-			_icon_type = val
-			
-			notify_property_list_changed()
-			_create_icon()
-var _icon_scripts : Array[Script]:
-	set(val):
-		if val != _icon_scripts:
-			_icon_scripts = val
-			_queue_batch_update()
+		_icon_type = val
+		
+		notify_property_list_changed()
+		_create_icon()
+var _icon_scripts : Array[Script]
 
 var _icon : IconBase = null
 var _icon_size : int = IconBase.DEFAULT_ICON_SIZE
@@ -61,15 +58,25 @@ var _is_queuing : bool = false
 
 
 #region Virtual Methods
-func _init() -> void:
-	add_icon_script(preload("uid://dyhhvqcy300sm"))
-	add_icon_script(preload("uid://l2q4q4vnluob"))
-	add_icon_script(preload("uid://8bjt6f1ip3oj"))
-	add_icon_script(preload("uid://bmxo2408u6o0w"))
-	add_icon_script(preload("uid://uo0ns2lhrhkd"))
-
 func _notification(what: int) -> void:
 	match what:
+		NOTIFICATION_READY:
+			if include_default_icons:
+				add_icon_script(preload("uid://uo0ns2lhrhkd"))
+				add_icon_script(preload("uid://cxqnbfkn4sque"))
+				add_icon_script(preload("uid://dyhhvqcy300sm"))
+				add_icon_script(preload("uid://l2q4q4vnluob"))
+				add_icon_script(preload("uid://8bjt6f1ip3oj"))
+				add_icon_script(preload("uid://b58the6pio4w"))
+				add_icon_script(preload("uid://ouh2uorb4gmr"))
+				add_icon_script(preload("uid://c6iw3dpi5q7va"))
+				add_icon_script(preload("uid://18fl8skgouv8"))
+				add_icon_script(preload("uid://bw124ti4smdn4"))
+				add_icon_script(preload("uid://sssi1oere6n7"))
+				add_icon_script(preload("uid://58tcc605ihw2"))
+				add_icon_script(preload("uid://ottnvo0s64il"))
+				add_icon_script(preload("uid://cvqvpsswcy6ph"))
+				add_icon_script(preload("uid://bmxo2408u6o0w"))
 		NOTIFICATION_SORT_CHILDREN:
 			_on_sort_children()
 
@@ -263,11 +270,13 @@ func add_icon_script(script : Script) -> void:
 		return
 	
 	_icon_scripts.append(script)
+	_queue_batch_update()
 func remove_icon_script(script : Script) -> void:
 	if !(script in _icon_scripts):
 		push_error("Attempted to remove script that has not been inserted.")
 		return
 	_icon_scripts.erase(script)
+	_queue_batch_update()
 
 func get_current_icon_script() -> Script:
 	if 0 > _icon_type || _icon_type >= _icon_scripts.size():
