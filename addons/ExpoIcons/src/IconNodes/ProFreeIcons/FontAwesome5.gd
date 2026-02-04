@@ -40,7 +40,7 @@ static func get_default_icon() -> String:
 
 
 #region Private Methods
-func _get_glyphs() -> Dictionary:
+func get_glyphs() -> Dictionary:
 	if GLYPHS.has(_icon_state):
 		return GLYPHS[_icon_state]
 	return {}

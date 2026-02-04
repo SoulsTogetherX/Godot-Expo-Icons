@@ -11,6 +11,12 @@ func _enter_tree() -> void:
 		load("uid://bfg5x70yt7pii"),
 		preload(ICON_FOLDER + "IconBase.svg")
 	)
+	add_custom_type(
+		"MultiIconContainer",
+		"Control",
+		load("uid://bn5panlmq1v2d"),
+		preload(ICON_FOLDER + "MultiIconContainer.svg")
+	)
 	
 	add_custom_type(
 		"AntDesign",

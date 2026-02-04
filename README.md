@@ -32,4 +32,3 @@ None.
 
 ## Profile
 If you like what I do, check out my [other stuff](https://ko-fi.com/soulstogether). Maybe buy me a coffee, if you want.
-

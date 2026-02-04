@@ -5,7 +5,6 @@ class_name IconBase extends Control
 ## The base abstract class for all icon nodes
 
 #region Constants
-const DEFAULT_COLOR := Color.WHITE ## Default Color for Icons
 const DEFAULT_ICON_SIZE := 16 ## Default font size for Icons
 #endregion
 
@@ -18,17 +17,13 @@ var icon_size : int:
 	set(val):
 		_icon_size = max(1, val)
 		queue_redraw()
-## Color of the Icon
-var icon_color : Color = DEFAULT_COLOR:
-	set(val):
-		icon_color = val
-		queue_redraw()
 
 ## String of the icon
 var icon_name : String:
-	get: return _icon_name
+	get:
+		return _icon_name
 	set(val):
-		var glyphs := _get_glyphs()
+		var glyphs := get_glyphs()
 		if glyphs.keys().has(val):
 			_current_icon = val
 			_icon_glyph = glyphs.keys().find(val)
@@ -37,9 +32,10 @@ var icon_name : String:
 
 ## Glyph Index of the icon
 var icon_glyph : int:
-	get: return _icon_glyph
+	get:
+		return _icon_glyph
 	set(val):
-		var glyphs := _get_glyphs()
+		var glyphs := get_glyphs()
 		if glyphs.size() > val:
 			_icon_glyph = val
 			_icon_name = glyphs.keys()[val]
@@ -73,8 +69,8 @@ var icon_padding_vertical : float = 0:
 #region Private Variables
 var _icon_size : int = DEFAULT_ICON_SIZE
 
-var _current_icon : String
-var _icon_name : String
+var _current_icon : StringName
+var _icon_name : StringName
 
 var _icon_glyph : int
 
@@ -83,32 +79,32 @@ var _min_size : Vector2
 
 
 #region Static Methods
-static func _load_json_file(filePath: String):
+static func _load_json_file(filePath: String) -> Dictionary:
 	if FileAccess.file_exists(filePath):
 		var dataFile = FileAccess.open(filePath, FileAccess.READ)
 		var parsedResult = JSON.parse_string(dataFile.get_as_text())
 		
 		if parsedResult is Dictionary:
 			return parsedResult
-		else:
-			print("Error reading file")
-	else:
-		print("File doesn't exist")
+		print("Error reading file")
+		return {}
+	print("File doesn't exist")
+	return {}
 #endregion
 
 
 #region Private Virtual Methods
 func _init() -> void:
-	var glyphs := _get_glyphs()
+	var glyphs := get_glyphs()
 	if _icon_name == "":
 		var defaultIcon := get_default_icon()
 		
 		_current_icon = defaultIcon
 		_icon_name = defaultIcon
 		_icon_glyph = glyphs.keys().find(defaultIcon)
-	else:
-		_current_icon = _icon_name
-		_icon_glyph = glyphs.keys().find(_icon_name)
+		return
+	_current_icon = _icon_name
+	_icon_glyph = glyphs.keys().find(_icon_name)
 func _get_minimum_size() -> Vector2:
 	return _min_size
 
@@ -117,7 +113,7 @@ func _get_property_list() -> Array[Dictionary]:
 	
 	properties.append({
 		"name" = "icon_name",
-		"type" = TYPE_STRING,
+		"type" = TYPE_STRING_NAME,
 		"usage" = PROPERTY_USAGE_DEFAULT
 	})
 	properties.append({
@@ -125,12 +121,7 @@ func _get_property_list() -> Array[Dictionary]:
 		"type": TYPE_INT,
 		"usage": PROPERTY_USAGE_DEFAULT,
 		"hint": PROPERTY_HINT_ENUM,
-		"hint_string": " ,".join(_get_glyphs().keys())
-	})
-	properties.push_back({
-		"name": "icon_color",
-		"type": TYPE_COLOR,
-		"usage": PROPERTY_USAGE_DEFAULT
+		"hint_string": ",".join(get_glyphs().keys())
 	})
 	properties.push_back({
 		"name": "icon_size",
@@ -181,7 +172,6 @@ func _property_can_revert(property: StringName) -> bool:
 	if property in [
 		&"icon_name",
 		&"icon_size",
-		&"icon_color",
 		&"icon_align_horizontal",
 		&"icon_align_vertical"
 		]:
@@ -200,8 +190,6 @@ func _property_get_revert(property: StringName) -> Variant:
 			return get_default_icon()
 		&"icon_size":
 			return DEFAULT_ICON_SIZE
-		&"icon_color":
-			return DEFAULT_COLOR
 		&"icon_align_horizontal", &"icon_align_vertical":
 			return 0.5
 		&"icon_padding_horizontal", &"icon_padding_vertical":
@@ -235,7 +223,7 @@ static func get_default_icon() -> String:
 ##
 ## See [constant fontFile]
 @abstract
-func _get_glyphs() -> Dictionary
+func get_glyphs() -> Dictionary
 
 ## An abstract method meant to be overridden.
 ##
@@ -292,7 +280,7 @@ func _draw_icon(fontFile : FontFile, glyphIndex : int) -> void:
 	
 	var glyph_info := _get_glyph_info(_icon_size, fontFile, glyphIndex)
 	_update_min_size(glyph_info.glyph_size)
-	fontFile.draw_char(ci, _get_icon_pos(glyph_info.glyph_size) - glyph_info.glyph_offset, glyphIndex, _icon_size, modulate * icon_color)
+	fontFile.draw_char(ci, _get_icon_pos(glyph_info.glyph_size) - glyph_info.glyph_offset, glyphIndex, _icon_size, modulate)
 #endregion
 
 
@@ -300,7 +288,7 @@ func _draw_icon(fontFile : FontFile, glyphIndex : int) -> void:
 ## When given an string [param icon_name], return the corresponding glyph index.
 ## Returns -1 if icon cannot be found within the curren glyphs.
 func get_glyph_by_name(icon_name: String) -> int:
-	var glyphs := _get_glyphs()
+	var glyphs := get_glyphs()
 	if glyphs.has(icon_name):
 		return glyphs[icon_name]
 	return -1

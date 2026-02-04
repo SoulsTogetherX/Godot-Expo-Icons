@@ -24,7 +24,7 @@ static func get_default_icon() -> String:
 ## See [constant FONT_FILE]
 func get_fontFile() -> FontFile:
 	return FONT_FILE
-func _get_glyphs() -> Dictionary:
+func get_glyphs() -> Dictionary:
 	return GLYPHS
 #endregion
 
