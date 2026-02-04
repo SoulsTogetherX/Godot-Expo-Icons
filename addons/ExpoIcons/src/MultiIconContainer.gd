@@ -216,7 +216,10 @@ func _property_get_revert(property: StringName) -> Variant:
 #region Private Methods (Events) 
 func _on_sort_children() -> void:
 	if _icon:
-		fit_child_in_rect(_icon, Rect2(Vector2.ZERO, size))
+		fit_child_in_rect(
+			_icon,
+			Rect2(Vector2.ZERO, size)
+		)
 func _get_minimum_size() -> Vector2:
 	return (
 		_icon.get_combined_minimum_size()
@@ -278,6 +281,7 @@ func _batch_update() -> void:
 	_is_queuing = false
 	_icon_type = mini(maxi(0, _icon_type), _icon_scripts.size() - 1)
 	notify_property_list_changed()
+	_set_icon_glyph()
 #endregion
 
 
