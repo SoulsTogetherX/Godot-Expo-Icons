@@ -10,7 +10,7 @@ const DEFAULT_ICON_SIZE := 16 ## Default font size for Icons
 
 
 #region External Variables
-## Font size of the Icon's Glyphs
+## Font size of the icon's Glyphs
 var icon_size : int:
 	get:
 		return _icon_size
@@ -18,7 +18,7 @@ var icon_size : int:
 		_icon_size = max(1, val)
 		queue_redraw()
 
-## String of the icon
+## String ID name of the icon
 var icon_name : String:
 	get:
 		return _icon_name
@@ -30,7 +30,7 @@ var icon_name : String:
 		_icon_name = val
 		queue_redraw()
 
-## Glyph Index of the icon
+## Glyph index of the icon
 var icon_glyph : int:
 	get:
 		return _icon_glyph
