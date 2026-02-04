@@ -21,7 +21,7 @@ enum ICON_STATE {
 		return _icon_state
 	set(state):
 		_icon_state = state
-		var glyphs := get_glyphs()
+		var glyphs := _get_glyphs()
 		var glyph_index = glyphs.keys().find(_current_icon)
 		if glyph_index == -1:
 			var defaultIcon := get_default_icon()
