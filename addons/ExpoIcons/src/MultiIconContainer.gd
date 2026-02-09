@@ -121,16 +121,16 @@ func _set(property: StringName, value: Variant) -> bool:
 		"icon_name":
 			icon_name = value
 			_set_icon_name()
-			return false
+			return true
 		"icon_glyph":
 			icon_glyph = value
 			_set_icon_glyph()
-			return false
+			return true
 		"icon_size":
 			icon_size = value
 			_set_icon_size()
-			return false
-	return true
+			return true
+	return false
 func _get(property: StringName) -> Variant:
 	match property:
 		"icon_name":
