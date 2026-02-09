@@ -236,6 +236,15 @@ func get_fontFile() -> FontFile
 
 
 #region Private Methods
+func _get_modulate_in_tree() -> Color:
+	var c := Color(1, 1, 1, 1)
+	var node : Node = self
+	
+	while node is CanvasItem:
+		c *= node.modulate
+		node = node.get_parent()
+	return c
+
 func _get_icon_pos(glyph_size : Vector2) -> Vector2:
 	return (size - glyph_size) * Vector2(icon_align_horizontal, icon_align_vertical)
 func _get_glyph_info(icon_size : int, fontFile: Font, glyph_selected: int) -> Dictionary:
@@ -280,7 +289,7 @@ func _draw_icon(fontFile : FontFile, glyphIndex : int) -> void:
 	
 	var glyph_info := _get_glyph_info(_icon_size, fontFile, glyphIndex)
 	_update_min_size(glyph_info.glyph_size)
-	fontFile.draw_char(ci, _get_icon_pos(glyph_info.glyph_size) - glyph_info.glyph_offset, glyphIndex, _icon_size, modulate)
+	fontFile.draw_char(ci, _get_icon_pos(glyph_info.glyph_size) - glyph_info.glyph_offset, glyphIndex, _icon_size, _get_modulate_in_tree())
 #endregion
 
 
