@@ -2,7 +2,9 @@
 @tool
 extends EditorPlugin
 
+
 const ICON_FOLDER := "res://addons/ExpoIcons/assets/icons/"
+
 
 func _enter_tree() -> void:
 	add_custom_type(

@@ -196,7 +196,7 @@ func _property_get_revert(property: StringName) -> Variant:
 			return 0
 	return null
 func _draw() -> void:
-	_draw_icon(get_fontFile(), get_glyph_by_name(_icon_name))
+	_draw_icon(get_font_file(), get_glyph_by_name(_icon_name))
 #endregion
 
 
@@ -219,19 +219,15 @@ static func get_default_icon() -> String:
 
 ## An abstract method meant to be overridden.
 ##
-## Returns the current FontFile in use.
-##
-## See [constant fontFile]
+## Returns the current [FontFile] in use.
 @abstract
 func get_glyphs() -> Dictionary
 
 ## An abstract method meant to be overridden.
 ##
-## Returns the current FontFile in use.
-##
-## See [constant fontFile]
+## Returns the current [FontFile] in use.
 @abstract
-func get_fontFile() -> FontFile
+func get_font_file() -> FontFile
 #endregion
 
 
@@ -247,9 +243,9 @@ func _get_modulate_in_tree() -> Color:
 
 func _get_icon_pos(glyph_size : Vector2) -> Vector2:
 	return (size - glyph_size) * Vector2(icon_align_horizontal, icon_align_vertical)
-func _get_glyph_info(icon_size : int, fontFile: Font, glyph_selected: int) -> Dictionary:
+func _get_glyph_info(icon_size : int, font_file: Font, glyph_selected: int) -> Dictionary:
 	var textline : TextLine = TextLine.new()
-	textline.add_string(char(glyph_selected), fontFile, icon_size)
+	textline.add_string(char(glyph_selected), font_file, icon_size)
 	var rid : RID = textline.get_rid()
 	var text_server : TextServer = TextServerManager.get_primary_interface()
 	var glyph : Dictionary = text_server.shaped_text_get_glyphs(rid)[0]
@@ -266,30 +262,31 @@ func _get_glyph_info(icon_size : int, fontFile: Font, glyph_selected: int) -> Di
 	return ret
 func _update_min_size(glyph_size : Vector2) -> Vector2:
 	var min_temp : Vector2 = glyph_size + Vector2(icon_padding_horizontal, icon_padding_vertical)
-	if min_temp == _min_size: return min_temp
+	if min_temp == _min_size:
+		return min_temp
 	_min_size = min_temp
 	
 	update_minimum_size()
 	return min_temp
 
 
-## Draws the Icon repersented by the [param fontFile] and [param glyphIndex].
+## Draws the Icon repersented by the [param font_file] and [param glyph_index].
 ## This will automatically handle the resizing, recoloing, and font size provided.
 ##
 ## If you wish to make your own icon, call this in a method overload of [method CanvasItem._draw]
-func _draw_icon(fontFile : FontFile, glyphIndex : int) -> void:
-	if fontFile == null:
+func _draw_icon(font_file : FontFile, glyph_index : int) -> void:
+	if font_file == null:
 		return
 	
 	var ci = get_canvas_item()
-	if glyphIndex == -1 || !fontFile.has_char(glyphIndex):
-		_update_min_size(_get_glyph_info(_icon_size, fontFile, 65).glyph_size)
+	if !is_vaild_icon():
+		_update_min_size(_get_glyph_info(_icon_size, font_file, 65).glyph_size)
 		draw_rect(Rect2(Vector2.ZERO, _min_size), Color.WHITE, false)
 		return
 	
-	var glyph_info := _get_glyph_info(_icon_size, fontFile, glyphIndex)
+	var glyph_info := _get_glyph_info(_icon_size, font_file, glyph_index)
 	_update_min_size(glyph_info.glyph_size)
-	fontFile.draw_char(ci, _get_icon_pos(glyph_info.glyph_size) - glyph_info.glyph_offset, glyphIndex, _icon_size, _get_modulate_in_tree())
+	font_file.draw_char(ci, _get_icon_pos(glyph_info.glyph_size) - glyph_info.glyph_offset, glyph_index, _icon_size, _get_modulate_in_tree())
 #endregion
 
 
@@ -301,6 +298,11 @@ func get_glyph_by_name(icon_name: String) -> int:
 	if glyphs.has(icon_name):
 		return glyphs[icon_name]
 	return -1
+
+## Returns [code]true[/code] is given parameters displays a vaild icon.
+func is_vaild_icon() -> bool:
+	var glyph_index = get_glyph_by_name(_icon_name)
+	return glyph_index != -1 && get_font_file().has_char(glyph_index)
 #endregion
 
 # Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
