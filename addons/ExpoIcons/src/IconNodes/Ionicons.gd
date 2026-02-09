@@ -22,7 +22,7 @@ static func get_default_icon() -> String:
 ## Returns the current FontFile in use.
 ## [br][br]
 ## See [constant FONT_FILE]
-func get_fontFile() -> FontFile:
+func get_font_file() -> FontFile:
 	return FONT_FILE
 func get_glyphs() -> Dictionary:
 	return GLYPHS

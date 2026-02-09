@@ -49,7 +49,7 @@ func get_glyphs() -> Dictionary:
 
 #region Public Methods
 ## Returns the current FontFile in use, based on the current [member icon_state] value.
-func get_fontFile() -> FontFile:
+func get_font_file() -> FontFile:
 	if METAS.has(_icon_state):
 		var meta = METAS[_icon_state]
 		for type : String in FONT_FILES.keys():
