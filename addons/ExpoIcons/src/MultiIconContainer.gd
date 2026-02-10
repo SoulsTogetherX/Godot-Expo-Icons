@@ -187,7 +187,7 @@ func _create_icon() -> void:
 		return
 	
 	_icon = icon_script.new()
-	add_child(_icon)
+	add_child(_icon, false, Node.INTERNAL_MODE_BACK)
 	fit_child_in_rect(_icon, Rect2(Vector2.ZERO, size))
 	
 	_set_icon_state()
