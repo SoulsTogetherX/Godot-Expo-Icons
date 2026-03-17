@@ -1,0 +1,32 @@
+# Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
+@tool
+@icon("uid://d252n60c2wkaf")
+class_name Zocial extends IconBase
+## The node for all icons located in the Zocial [FontFile]
+
+#region Constants
+const DEFAULT_ICON : String = "guest" ## Default Icon
+const FONT_FILE : FontFile = preload("./Font.ttf") ## Used [FontFile]
+const GLYPHS : Dictionary = preload("./Glyphs.json").data ## Used glyphs
+#endregion
+
+
+#region Static Methods
+## When given an string [member icon_name], return the corresponding glyph index.
+## Returns -1 if icon cannot be found within the curren glyphs
+static func get_default_icon() -> String:
+	return DEFAULT_ICON
+#endregion
+
+
+#region Public Methods
+## Returns the current FontFile in use.
+## [br][br]
+## See [constant FONT_FILE]
+func get_font_file() -> FontFile:
+	return FONT_FILE
+func get_glyphs() -> Dictionary:
+	return GLYPHS
+#endregion
+
+# Made by Xavier Alvarez. A part of the "Expo Icons" Godot addon. @2025
